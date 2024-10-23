@@ -12,6 +12,7 @@ using Niantic.Lightship.AR.XRSubsystems;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR.ARSubsystems;
+using System.Linq;
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 using UnityEngine.Android;
@@ -77,6 +78,14 @@ namespace Niantic.Lightship.AR.LocationAR
         // _trackedARLocations will be populated by HandleARPersistentAnchorStateChanged()
         private readonly List<ARLocation> _trackedARLocations = new();
 
+
+        public Dictionary<ARPersistentAnchor, ARLocation> AnchorToARLocationMap
+        {
+            get
+            {
+                return _anchorToARLocationMap;
+            }
+        }
         // _anchorToARLocationMap holds the relationship between each anchor and its corresponding location
         // ARPersistentAnchorManager updates anchors and then we use this map to determine what location corresponds to what anchor update
         // ARLocationManager will only consume a subset of the anchor updates. What ar locations will be tracked is determined by _trackedARLocations
@@ -106,6 +115,8 @@ namespace Niantic.Lightship.AR.LocationAR
         protected override void Start()
         {
             base.Start();
+
+            /*
             var arLocations = new List<ARLocation>();
             foreach (var arLocation in ARLocations)
             {
@@ -127,6 +138,7 @@ namespace Niantic.Lightship.AR.LocationAR
                 SetARLocations(arLocations.ToArray());
                 StartTracking();
             }
+            */
         }
 
         protected override void OnDisable()
@@ -136,6 +148,23 @@ namespace Niantic.Lightship.AR.LocationAR
 
             // This stops TryStartLocationServiceForCoverage coroutine
             _keepTryingStartLocationServices = true;
+        }
+
+
+        public void TrackARLocation(string payload, bool isContinuousLocalization, bool isInterpolationEnable)
+        {
+            var arLocations = new List<ARLocation>();
+            var foundARLocation = ARLocations.ToList().Find(i => i.Payload.ToBase64() == payload);
+
+            ContinuousLocalizationEnabled = isContinuousLocalization;
+            InterpolationEnabled = isInterpolationEnable;
+            if (foundARLocation == null)
+                Debug.Log("AR location is not found");
+
+            arLocations.Add(foundARLocation);
+            SetARLocations(arLocations.ToArray());
+            StartTracking();
+
         }
 
         /// <summary>

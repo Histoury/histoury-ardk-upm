@@ -591,9 +591,11 @@ namespace Niantic.Lightship.AR.LocationAR
 
         private new void OnDestroy()
         {
+            base.OnDestroy();
+            if (_deviceMapAccessController == null) return;
+            
             _deviceMapAccessController.ClearDeviceMap();
             _deviceMapAccessController.Destroy();
-            base.OnDestroy();
         }
     }
 }

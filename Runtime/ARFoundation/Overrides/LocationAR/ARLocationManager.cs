@@ -577,25 +577,25 @@ namespace Niantic.Lightship.AR.LocationAR
 
         private void ClearLocationManagerState()
         {
-            _trackedARLocations.Clear();
-            _anchorToARLocationMap.Clear();
-            _originalParents.Clear();
+            _trackedARLocations?.Clear();
+            _anchorToARLocationMap?.Clear();
+            _originalParents?.Clear();
 
             foreach (var arLocationHolder in _coverageARLocationHolders)
             {
                 Destroy(arLocationHolder);
             }
-            _coverageARLocationHolders.Clear();
-            _deviceMapAccessController.ClearDeviceMap();
+            _coverageARLocationHolders?.Clear();
+            _deviceMapAccessController?.ClearDeviceMap();
         }
 
         private new void OnDestroy()
         {
-            base.OnDestroy();
             if (_deviceMapAccessController == null) return;
-            
-            _deviceMapAccessController.ClearDeviceMap();
-            _deviceMapAccessController.Destroy();
+        
+            _deviceMapAccessController?.ClearDeviceMap();
+            _deviceMapAccessController?.Destroy();
+            base.OnDestroy();
         }
     }
 }

@@ -228,13 +228,15 @@ namespace Niantic.Lightship.AR.LocationAR
             }
         }
 
-        internal GameObject MockAsset
+        public GameObject MockAsset
         {
             get => _mockAsset;
             set
             {
                 _mockAsset = value;
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(this);
+#endif
             }
         }
 

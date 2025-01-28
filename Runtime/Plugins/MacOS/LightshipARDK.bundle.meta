@@ -1,18 +1,30 @@
 fileFormatVersion: 2
 guid: 48f22318eb55d188c730a4a77be94ac0
-fileFormatVersion: 2
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap: {}
   executionOrder: {}
+  defineConstraints: []
   isPreloaded: 0
   isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
   platformData:
   - first:
       : Any
     second:
       enabled: 0
+      settings: {}
+  - first:
+      : OSXIntel
+    second:
+      enabled: 1
+      settings: {}
+  - first:
+      : OSXIntel64
+    second:
+      enabled: 1
       settings: {}
   - first:
       Android: Android
@@ -53,16 +65,6 @@ PluginImporter:
       settings:
         CPU: AnyCPU
   - first:
-      '': OSXIntel
-    second:
-      enabled: 1
-      settings: {}
-  - first:
-      '': OSXIntel64
-    second:
-      enabled: 1
-      settings: {}
-  - first:
       Standalone: Win
     second:
       enabled: 0
@@ -79,7 +81,10 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        CPU: AnyCPU
         AddToEmbeddedBinaries: true
+        CPU: AnyCPU
         CompileFlags: null
         FrameworkDependencies: Foundation;UIKit;Security;Metal
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

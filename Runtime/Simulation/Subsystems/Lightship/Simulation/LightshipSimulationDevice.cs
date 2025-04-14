@@ -88,6 +88,7 @@ namespace Niantic.Lightship.AR.Simulation
         {
             if (!s_instance)
             {
+                /*
                 SimulationCamera.GetOrCreateSimulationCamera();
                 var xrSimulationCamera = GameObject.Find("SimulationCamera");
 
@@ -106,6 +107,7 @@ namespace Niantic.Lightship.AR.Simulation
                 s_instance.RgbCamera = camera;
 
                 s_instance._lastAspectRatio = LightshipSimulationEditorUtility.GetGameViewAspectRatio();
+                */
             }
 
             return s_instance;
